@@ -1,8 +1,13 @@
 plugins {
-	id "java"
+	id "signing"
+	id "java-library"
+	id "maven-publish"
+	id "org.jreleaser" version "1.17.0"
 }
 
 java {
+	withJavadocJar()
+	withSourcesJar()
 	sourceCompatibility = JavaVersion.VERSION_1_8
 	targetCompatibility = JavaVersion.VERSION_1_8
 }
@@ -21,6 +26,86 @@ jar {
 		exclude "META-INF/*.SF"
 		exclude "META-INF/*.DSA"
 		exclude "META-INF/*.RSA"
+	}
+}
+
+signing {
+	useGpgCmd()
+	required = true
+	sign publishing.publications
+}
+
+publishing {
+	publications {
+		maven(MavenPublication) {
+			version = "0.1.0"
+			groupId = "com.nettleweb"
+			artifactId = "http"
+
+			pom {
+				url = "https://github.com/nettleweb/simple-http#readme"
+				name = "Simple HTTP"
+				packaging = "jar"
+				description = "A simple lightweight HTTP server library for Java and Android"
+				inceptionYear = "2024"
+
+				scm {
+					url = "https://github.com/nettleweb/simple-http"
+					connection = "scm:git:https://github.com/nettleweb/simple-http.git"
+				}
+
+				licenses {
+					license {
+						name = "MIT License"
+						url = "http://www.opensource.org/licenses/mit-license.php"
+					}
+				}
+
+				developers {
+					developer {
+						name = "Ruochen Jia"
+					}
+				}
+			}
+
+			from components.java
+		}
+	}
+
+	repositories {
+		maven {
+			url = layout.buildDirectory.dir("staging-deploy")
+		}
+	}
+}
+
+jreleaser {
+	signing {
+		active = "ALWAYS"
+		verify = true
+		armored = true
+	}
+
+	release {
+		github {
+			enabled = false
+		}
+	}
+
+	deploy {
+		maven {
+			mavenCentral {
+				sonatype {
+					url = "https://central.sonatype.com/api/v1/publisher"
+					sign = true
+					active = "ALWAYS"
+					checksums = true
+					verifyPom = true
+					snapshotSupported = false
+					stagingRepository "build/staging-deploy"
+				}
+			}
+		}
 	}
 }
 
@@ -47,8 +132,6 @@ compileJava {
 
 repositories {
 	google()
-	maven { url "https://jitpack.io" }
-	maven { url "https://maven.fabric.io/public" }
 	mavenCentral()
 }
 

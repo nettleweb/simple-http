@@ -5,8 +5,6 @@ import org.jetbrains.annotations.*;
 import java.io.*;
 
 public class EmptyStream extends InputStream {
-	static final EmptyStream instance = new EmptyStream();
-
 	public EmptyStream() {
 	}
 

@@ -1,6 +1,5 @@
 package com.nettleweb.http;
 
-import jdk.internal.vm.annotation.*;
 import org.jetbrains.annotations.*;
 
 import java.io.*;
@@ -13,7 +12,6 @@ final class Util {
 
 	private Util() {}
 
-	@ForceInline
 	public static URI optURL(String url) {
 		if (url == null)
 			return null;
@@ -26,7 +24,6 @@ final class Util {
 	}
 
 	@NotNull
-	@ForceInline
 	public static HTTPRequest parseRawRequest(String message, InputStream stream) {
 		if ((message = message.trim()).isEmpty())
 			throw new ProtocolError("Empty message");
@@ -53,7 +50,6 @@ final class Util {
 	}
 
 	@NotNull
-	@ForceInline
 	public static HTTPResponse parseRawResponse(String message, InputStream stream) {
 		if ((message = message.trim()).isEmpty())
 			throw new ProtocolError("Empty message");

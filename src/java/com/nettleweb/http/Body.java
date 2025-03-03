@@ -1,6 +1,5 @@
 package com.nettleweb.http;
 
-import jdk.internal.vm.annotation.*;
 import org.jetbrains.annotations.*;
 
 import java.io.*;
@@ -26,7 +25,8 @@ public abstract class Body extends Cloneable implements Serializable {
 		return stream == null ? emptyBody : new StreamBody(stream, null);
 	}
 
-	@NotNull // no longer public because it is unsafe and its usage should be restricted
+	@NotNull
+	// no longer public because it is unsafe and its usage should be restricted
 	static Body from(@Nullable InputStream stream, @Nullable String encoding) {
 		return stream == null ? emptyBody : new StreamBody(stream, encoding);
 	}
@@ -45,7 +45,6 @@ public abstract class Body extends Cloneable implements Serializable {
 	@NotNull
 	public abstract InputStream stream();
 
-	@ForceInline
 	public void pipeTo(@NotNull OutputStream out) {
 		pipeTo(out, false);
 	}

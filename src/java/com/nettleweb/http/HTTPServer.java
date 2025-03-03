@@ -1,6 +1,5 @@
 package com.nettleweb.http;
 
-import jdk.internal.vm.annotation.*;
 import org.jetbrains.annotations.*;
 
 import javax.net.*;
@@ -41,17 +40,14 @@ public class HTTPServer implements Runnable, Flushable, Closeable {
 		factory = ServerSocketFactory.getDefault();
 	}
 
-	@ForceInline
 	public HTTPServer(int port) {
 		this(null, port);
 	}
 
-	@ForceInline
 	public HTTPServer(@Nullable String host, int port) {
 		this(host, port, 255);
 	}
 
-	@ForceInline
 	public HTTPServer(@Nullable String host, int port, int backlog) {
 		this(host, port, backlog, null);
 	}

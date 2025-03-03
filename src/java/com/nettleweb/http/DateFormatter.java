@@ -1,7 +1,5 @@
 package com.nettleweb.http;
 
-import jdk.internal.vm.annotation.*;
-
 import java.text.*;
 import java.util.*;
 
@@ -16,12 +14,10 @@ final class DateFormatter {
 
 	private DateFormatter() {}
 
-	@IntrinsicCandidate
 	public static String iso() {
 		return isoDate.format(new Date(System.currentTimeMillis()));
 	}
 
-	@IntrinsicCandidate
 	public static String utc() {
 		return utcDate.format(new Date(System.currentTimeMillis()));
 	}

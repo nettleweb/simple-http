@@ -1,6 +1,5 @@
 package com.nettleweb.http;
 
-import jdk.internal.vm.annotation.*;
 import org.jetbrains.annotations.*;
 
 import java.io.*;
@@ -88,7 +87,6 @@ loop:
 	}
 
 	public static final class UnsupportedStream extends CompatStream {
-		@Stable
 		private final Object stream;
 
 		public UnsupportedStream(@NotNull Object stream) {
@@ -110,7 +108,6 @@ loop:
 		private int chunkPos = 0;
 		private int chunkLen = 0;
 
-		@Stable
 		private final Object stream;
 
 		public ChunkedStream(@NotNull Object stream) {

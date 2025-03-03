@@ -1,6 +1,5 @@
 package com.nettleweb.http;
 
-import jdk.internal.vm.annotation.*;
 import org.jetbrains.annotations.*;
 
 import java.io.*;
@@ -65,7 +64,6 @@ public abstract class HTTPLogger {
 		println(builder.substring(0, builder.length() - 1));
 	}
 
-	@ForceInline
 	public void log(@Nullable String data) {
 		println(log().append(data).toString());
 	}
@@ -78,7 +76,6 @@ public abstract class HTTPLogger {
 		warn(builder.substring(0, builder.length() - 1));
 	}
 
-	@ForceInline
 	public void warn(@Nullable String data) {
 		println(warn().append(data).toString());
 	}
@@ -91,14 +88,11 @@ public abstract class HTTPLogger {
 		error(builder.substring(0, builder.length() - 1));
 	}
 
-	@ForceInline
 	public void error(@Nullable String data) {
 		printErr(error().append(data).toString());
 	}
 
-	@IntrinsicCandidate
 	public abstract void println(@Nullable String data);
 
-	@IntrinsicCandidate
 	public abstract void printErr(@Nullable String data);
 }
